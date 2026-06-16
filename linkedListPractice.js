@@ -90,3 +90,55 @@ function countSongs(playlist) {
   
   return count;
 }
+
+function navigatePlaylist(currentSong, direction, steps = 1) {
+  // Navigate forward or backward in a doubly linked playlist
+  // direction: "forward" or "backward"
+  // steps: number of songs to move
+  // Return the destination song or null if can't move that far
+  
+  let current = currentSong;
+
+  if (current !== null){
+    for (let i = 0; i < steps; i++){
+      if (direction === "forward"){
+        if(current.next){
+          current = current.next}
+        else{
+          return null
+        }
+      } 
+      else {
+        if(current.prev){
+          current = current.prev}
+        else{
+          return null
+        }
+      }
+    }
+    return current
+  }
+}
+
+  function calculatePlaylistDuration(head) {
+  // Calculate the total duration of all songs in the playlist
+  // Return the total duration in seconds
+  
+  let totalDuration = 0;
+  let current = head;
+
+  while (current !== null){
+    totalDuration += current.duration
+    if(current.next !== null){
+      current = current.next
+    }
+    else{
+      return totalDuration
+    }
+  }
+  
+  // TODO: Traverse the playlist and sum up all song durations
+  // Hint: Use the basic traversal pattern with a while loop
+  
+  return totalDuration;
+}
